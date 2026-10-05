@@ -22,15 +22,15 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
-      # Pin a release tag (or a commit) so a toolkit update never changes your results unannounced.
+      # Pin an exact version so a toolkit update never changes your results unannounced.
       - name: Install cra-toolkit
-        run: pip install "git+https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit.git@v0.1.0"
+        run: pip install "cra-toolkit==0.1.1"
 
       # Exit codes: 0 ok · 1 findings at/above --fail-on · 2 error (e.g. OSV.dev unreachable).
       # Choose the gate that matches your risk appetite: critical | high | medium | low | any.
@@ -48,7 +48,7 @@ jobs:
       # Keep the evidence even (especially) when the gate fails.
       - name: Keep the evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cra-evidence-${{ github.sha }}
           path: |

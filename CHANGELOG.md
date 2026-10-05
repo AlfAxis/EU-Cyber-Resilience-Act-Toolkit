@@ -6,6 +6,20 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-05
+
+First release published to PyPI (`pip install cra-toolkit`). No functional changes to the toolkit.
+
+### Added
+
+- Release workflow publishes to PyPI via Trusted Publishing (no stored token), once enabled.
+
+### Changed
+
+- README links are absolute, so they work on the PyPI project page.
+- Install instructions, CI snippets and the example workflow use the PyPI package and current
+  GitHub Actions versions (`checkout`, `setup-python`, `upload-artifact` v7).
+
 ## [0.1.0] - 2026-10-05
 
 First public release.
@@ -37,5 +51,6 @@ First public release.
 - CI on Linux, macOS and Windows for Python 3.10–3.13; release workflow; Dependabot; issue and pull
   request templates.
 
-[Unreleased]: https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/releases/tag/v0.1.0

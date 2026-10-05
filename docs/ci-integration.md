@@ -47,7 +47,7 @@ Anything that can run `pip` works. A GitLab CI job, for instance:
 cra-scan:
   image: python:3.12-slim
   script:
-    - pip install "git+https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit.git"
+    - pip install "cra-toolkit==0.1.1"
     - cra-toolkit scan . --fail-on high --sbom sbom.cdx.json --report scan-report.json
   artifacts:
     when: always
@@ -56,8 +56,15 @@ cra-scan:
 
 ## Pinning
 
-For reproducible pipelines, pin a tag or commit instead of the default branch:
+For reproducible pipelines, pin an exact version so a toolkit update never changes your results
+unannounced:
 
 ```bash
-pip install "git+https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit.git@v0.1.0"
+pip install "cra-toolkit==0.1.1"
+```
+
+To use an unreleased state instead, pin a tag or commit from GitHub:
+
+```bash
+pip install "git+https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit.git@v0.1.1"
 ```
