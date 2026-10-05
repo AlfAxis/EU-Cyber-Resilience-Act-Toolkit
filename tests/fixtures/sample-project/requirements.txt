@@ -1,0 +1,12 @@
+# Sample requirements file used by the test-suite.
+--index-url https://pypi.org/simple
+-r other-requirements.txt
+requests==2.19.1 \
+    --hash=sha256:ec22d826a36ed72a7358ff3fe56cbd4ba69dd7a6718ffd450ff0e9df7a47ce6a
+Flask_Cors[dev]==3.0.8 ; python_version >= "3.8"
+PyYAML>=5.0,<7  # range: not an exact pin
+urllib3
+git+https://github.com/example/private.git#egg=private
+-e ./local-package
+Django===4.2.0
+numpy==1.*

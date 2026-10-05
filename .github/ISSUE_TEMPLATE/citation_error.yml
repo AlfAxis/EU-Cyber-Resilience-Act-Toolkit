@@ -1,0 +1,31 @@
+name: Legal citation or wording error
+description: A deadline, article reference or generated legal text looks wrong
+labels: [regulatory-accuracy]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The toolkit encodes parts of Regulation (EU) 2024/2847 (deadlines, article references, Annex II
+        structure, draft wording). Errors here matter more than most bugs. This is **not** a request for
+        legal advice, only a correction of what the tool states.
+  - type: textarea
+    id: where
+    attributes:
+      label: Where does the tool state it?
+      description: The command and output, or the file and line (for example `src/cra_toolkit/i18n.py`).
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong or missing
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source in the official text
+      description: Article / paragraph / annex point, ideally with an EUR-Lex link.
+      placeholder: "Art. 14(2)(c), https://eur-lex.europa.eu/eli/reg/2024/2847/oj"
+    validations:
+      required: true

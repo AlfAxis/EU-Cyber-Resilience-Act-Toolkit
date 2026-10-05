@@ -1,0 +1,27 @@
+{
+  "_readme": ["This file locks the dependencies of your project to a known state"],
+  "content-hash": "0123456789abcdef",
+  "packages": [
+    {
+      "name": "monolog/monolog",
+      "version": "2.9.1",
+      "dist": {"type": "zip", "url": "https://example.invalid/monolog.zip", "shasum": ""}
+    },
+    {
+      "name": "symfony/http-kernel",
+      "version": "v5.4.20"
+    },
+    {
+      "name": "example/branch-pinned",
+      "version": "dev-main"
+    }
+  ],
+  "packages-dev": [
+    {
+      "name": "phpunit/phpunit",
+      "version": "9.6.3"
+    }
+  ],
+  "aliases": [],
+  "minimum-stability": "stable"
+}

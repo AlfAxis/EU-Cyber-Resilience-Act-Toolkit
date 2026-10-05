@@ -1,0 +1,47 @@
+[
+  {
+    "id": "TEST-GO-0001",
+    "summary": "Synthetic issue in gin (test fixture)",
+    "database_specific": {"severity": "MODERATE"},
+    "affected": [
+      {
+        "package": {"ecosystem": "Go", "name": "github.com/gin-gonic/gin"},
+        "ranges": [
+          {"type": "SEMVER", "events": [{"introduced": "1.0.0"}, {"fixed": "1.7.7"}, {"introduced": "1.8.0"}, {"fixed": "1.8.2"}]}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "TEST-NPM-WITHDRAWN",
+    "withdrawn": "2024-01-01T00:00:00Z",
+    "summary": "Withdrawn advisory that must never be reported",
+    "affected": [
+      {
+        "package": {"ecosystem": "npm", "name": "lodash"},
+        "ranges": [{"type": "SEMVER", "events": [{"introduced": "0"}]}]
+      }
+    ]
+  },
+  {
+    "id": "TEST-NPM-ALREADY-FIXED",
+    "summary": "Fixed before the version in the sample project",
+    "affected": [
+      {
+        "package": {"ecosystem": "npm", "name": "@babel/core"},
+        "ranges": [{"type": "SEMVER", "events": [{"introduced": "0"}, {"fixed": "7.20.0"}]}]
+      }
+    ]
+  },
+  {
+    "id": "TEST-MAVEN-0001",
+    "summary": "Synthetic issue in log4j-core (test fixture)",
+    "database_specific": {"severity": "HIGH"},
+    "affected": [
+      {
+        "package": {"ecosystem": "Maven", "name": "org.apache.logging.log4j:log4j-core"},
+        "ranges": [{"type": "ECOSYSTEM", "events": [{"introduced": "2.0-beta9"}, {"fixed": "2.15.0"}]}]
+      }
+    ]
+  }
+]

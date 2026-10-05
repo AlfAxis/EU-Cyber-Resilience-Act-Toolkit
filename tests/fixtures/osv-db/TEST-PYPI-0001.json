@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.6.0",
+  "id": "TEST-PYPI-0001",
+  "aliases": ["CVE-0000-0002"],
+  "summary": "Synthetic request smuggling in Requests (test fixture)",
+  "database_specific": {"severity": "CRITICAL"},
+  "affected": [
+    {
+      "package": {"ecosystem": "PyPI", "name": "Requests"},
+      "versions": ["2.19.0", "2.19.1"],
+      "ranges": [
+        {"type": "ECOSYSTEM", "events": [{"introduced": "2.0.0"}, {"fixed": "2.20.0"}]}
+      ]
+    }
+  ]
+}

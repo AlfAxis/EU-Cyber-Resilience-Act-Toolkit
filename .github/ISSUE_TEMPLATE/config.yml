@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability in the toolkit
+    url: https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/security/advisories/new
+    about: Please use a private advisory, not a public issue. See SECURITY.md.

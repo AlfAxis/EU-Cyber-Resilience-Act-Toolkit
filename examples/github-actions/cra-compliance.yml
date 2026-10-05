@@ -1,0 +1,57 @@
+# Example: run cra-toolkit in your own repository's CI.
+#
+# Copy this file to .github/workflows/cra-compliance.yml in the repository that contains
+# the product you ship, and adjust the marked values.
+
+name: CRA compliance
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    # Weekly: new advisories are published without any change to your code, so a
+    # product that was clean last week can have an open finding today.
+    - cron: "0 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Pin a release tag (or a commit) so a toolkit update never changes your results unannounced.
+      - name: Install cra-toolkit
+        run: pip install "git+https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit.git@v0.1.0"
+
+      # Exit codes: 0 ok · 1 findings at/above --fail-on · 2 error (e.g. OSV.dev unreachable).
+      # Choose the gate that matches your risk appetite: critical | high | medium | low | any.
+      - name: Inventory and vulnerability check
+        run: >
+          cra-toolkit scan .
+          --fail-on high
+          --sbom sbom.cdx.json
+          --report scan-report.json
+          --no-archive
+          --production-only
+        # Accept a specific, reviewed finding with:  --ignore CVE-YYYY-NNNNN
+        # Fully offline? Add:  --offline-db ./osv-db   (see docs/offline-scanning.md)
+
+      # Keep the evidence even (especially) when the gate fails.
+      - name: Keep the evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cra-evidence-${{ github.sha }}
+          path: |
+            sbom.cdx.json
+            scan-report.json
+          retention-days: 90
