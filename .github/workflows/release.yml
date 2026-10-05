@@ -29,3 +29,24 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "${GITHUB_REF_NAME}" dist/* --generate-notes --verify-tag
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+
+  # Trusted Publishing: PyPI trusts this workflow, so no API token is stored anywhere.
+  # Off until the pending publisher is registered on PyPI and the repository variable
+  # PUBLISH_TO_PYPI is set to "true" (Settings -> Secrets and variables -> Actions -> Variables).
+  publish-pypi:
+    needs: release
+    if: vars.PUBLISH_TO_PYPI == 'true'
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1

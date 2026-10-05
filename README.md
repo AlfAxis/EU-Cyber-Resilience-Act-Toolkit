@@ -5,7 +5,8 @@
 **Open-source tooling for EU Cyber Resilience Act compliance — SBOM generation, vulnerability matching, and Article 14 report drafting from the command line.**
 
 [![CI](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/cra-toolkit.svg)](https://pypi.org/project/cra-toolkit/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/LICENSE)
 ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 ![Typed](https://img.shields.io/badge/typing-strict-informational.svg)
 ![Output: DE / EN](https://img.shields.io/badge/output-DE%20%2F%20EN-lightgrey.svg)
@@ -56,11 +57,18 @@ via the single reporting platform (Art. 14(1), Art. 16):
 | **Final report** | **≤ 14 days after a corrective or mitigating measure is available** | ≤ 1 month after the incident notification |
 
 The clock runs in plain hours: weekends and public holidays do not pause it. More detail, including
-how each CRA provision maps onto a command, in [docs/regulatory-context.md](docs/regulatory-context.md).
+how each CRA provision maps onto a command, in [docs/regulatory-context.md](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/docs/regulatory-context.md).
 
 ## Install
 
 Requires Python 3.10 or newer. The only runtime dependency is [`requests`](https://requests.readthedocs.io/).
+
+```bash
+pipx install cra-toolkit
+```
+
+(or `pip install cra-toolkit` inside a virtual environment). To install the unreleased development
+version straight from GitHub instead:
 
 ```bash
 pipx install "git+https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit.git"
@@ -94,7 +102,7 @@ cra-toolkit status
 ```
 
 A try-it-yourself project covering every supported ecosystem ships in
-[`tests/fixtures/sample-project`](tests/fixtures/sample-project):
+[`tests/fixtures/sample-project`](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/tree/main/tests/fixtures/sample-project):
 
 ```bash
 cra-toolkit scan tests/fixtures/sample-project --no-archive
@@ -148,7 +156,7 @@ Hinweis: Ein sauberer Scan ist ein Nachweis, keine Konformität. Keine Rechtsber
 | Option | Purpose |
 |---|---|
 | `--fail-on {none,any,low,medium,high,critical}` | CI gate: exit 1 at this severity or above (default `none`) |
-| `--offline-db PATH` | Match against a local OSV dump for air-gapped environments — see [docs/offline-scanning.md](docs/offline-scanning.md) |
+| `--offline-db PATH` | Match against a local OSV dump for air-gapped environments — see [docs/offline-scanning.md](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/docs/offline-scanning.md) |
 | `--ignore ID` | Accept a known finding by ID or alias; recorded in the evidence report |
 | `--production-only` | Leave out dev/test-only dependencies |
 | `--sbom FILE` / `--report FILE` | Also write the SBOM / JSON evidence report |
@@ -156,7 +164,7 @@ Hinweis: Ein sauberer Scan ist ein Nachweis, keine Konformität. Keine Rechtsber
 
 **What leaves your machine:** the online scan sends only the package URLs of your components
 (e.g. `pkg:npm/lodash@4.17.15`) to `api.osv.dev` and fetches advisories by ID. If even the inventory is
-sensitive, use `--offline-db`, which makes no network calls ([SECURITY.md](SECURITY.md)).
+sensitive, use `--offline-db`, which makes no network calls ([SECURITY.md](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/SECURITY.md)).
 
 Severity comes from the CVSS v3.x vector (computed locally), falling back to the database's own
 label. Findings whose severity cannot be determined are shown as *unbekannt*; they trip only
@@ -259,9 +267,9 @@ that cannot be parsed **aborts the run**: an SBOM that quietly misses a lockfile
 ## Running it in CI
 
 ```yaml
-- run: pipx install "git+https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit.git"
+- run: pipx install "cra-toolkit==0.1.1"
 - run: cra-toolkit scan . --fail-on high --sbom sbom.cdx.json --report scan-report.json
-- uses: actions/upload-artifact@v4
+- uses: actions/upload-artifact@v7
   if: always()
   with: { name: cra-evidence, path: "sbom.cdx.json\nscan-report.json" }
 ```
@@ -273,8 +281,8 @@ that cannot be parsed **aborts the run**: an SBOM that quietly misses a lockfile
 | `2` | Usage or runtime error — **including an unreachable vulnerability database**, so a CI job can't turn green because the check never ran |
 
 A complete, annotated workflow is in
-[`examples/github-actions/cra-compliance.yml`](examples/github-actions/cra-compliance.yml);
-more in [docs/ci-integration.md](docs/ci-integration.md).
+[`examples/github-actions/cra-compliance.yml`](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/examples/github-actions/cra-compliance.yml);
+more in [docs/ci-integration.md](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/docs/ci-integration.md).
 
 ## What it writes to disk
 
@@ -292,7 +300,7 @@ plain, diff-able JSON/Markdown:
 ```
 
 Commit this directory to *your own* compliance repository. Formats are described in
-[docs/data-model.md](docs/data-model.md).
+[docs/data-model.md](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/docs/data-model.md).
 
 ## Design principles
 
@@ -348,10 +356,11 @@ ruff check . && ruff format --check . && mypy && pytest
 ```
 
 CI runs this on Linux, macOS and Windows across Python 3.10 – 3.13. See
-[CONTRIBUTING.md](CONTRIBUTING.md) for the workflow, and [SECURITY.md](SECURITY.md) to report
-a vulnerability in the toolkit itself.
+[CONTRIBUTING.md](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/CONTRIBUTING.md)
+for the workflow, and [SECURITY.md](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/SECURITY.md)
+to report a vulnerability in the toolkit itself.
 
 ## License
 
-[MIT](LICENSE). Regulation (EU) 2024/2847 is quoted by reference only; consult the official text on
+[MIT](https://github.com/AlfAxis/EU-Cyber-Resilience-Act-Toolkit/blob/main/LICENSE). Regulation (EU) 2024/2847 is quoted by reference only; consult the official text on
 [EUR-Lex](https://eur-lex.europa.eu/eli/reg/2024/2847/oj) for the authoritative wording.
